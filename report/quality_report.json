@@ -1,0 +1,320 @@
+{
+  "scores": {
+    "baseline": 99.99,
+    "new": 98.7
+  },
+  "checks_passed": {
+    "baseline": "17/17",
+    "new": "14/19"
+  },
+  "failed_checks": [
+    {
+      "batch": "new",
+      "column": "temperature_c",
+      "check": "completeness",
+      "value": 0.919,
+      "threshold": 0.95,
+      "detail": "413 nulls of 5100 rows"
+    },
+    {
+      "batch": "new",
+      "column": "humidity_pct",
+      "check": "completeness",
+      "value": 0.92,
+      "threshold": 0.95,
+      "detail": "408 nulls of 5100 rows"
+    },
+    {
+      "batch": "new",
+      "column": "humidity_pct",
+      "check": "validity",
+      "value": 0.974,
+      "threshold": 0.99,
+      "detail": "122 invalid non-null values"
+    },
+    {
+      "batch": "new",
+      "column": "battery_pct",
+      "check": "validity",
+      "value": 0.9818,
+      "threshold": 0.99,
+      "detail": "93 invalid non-null values"
+    },
+    {
+      "batch": "new",
+      "column": "(dataset)",
+      "check": "duplicates",
+      "value": 1.96,
+      "threshold": 1.0,
+      "detail": "100 duplicate rows"
+    }
+  ],
+  "drift_findings": [
+    {
+      "column": "device_id",
+      "type": "categorical",
+      "psi": 0.07,
+      "psi_band": "no change",
+      "test": "chi2",
+      "p_value": 0.8961516281847411,
+      "drifted": false
+    },
+    {
+      "column": "temperature_c",
+      "type": "numeric",
+      "psi": 2.6944,
+      "psi_band": "significant",
+      "test": "ks",
+      "p_value": 0.0,
+      "drifted": true
+    },
+    {
+      "column": "humidity_pct",
+      "type": "numeric",
+      "psi": 0.0061,
+      "psi_band": "no change",
+      "test": "ks",
+      "p_value": 0.033539050442191104,
+      "drifted": true
+    },
+    {
+      "column": "battery_pct",
+      "type": "numeric",
+      "psi": 0.0065,
+      "psi_band": "no change",
+      "test": "ks",
+      "p_value": 0.003989335885370885,
+      "drifted": true
+    },
+    {
+      "column": "signal_dbm",
+      "type": "numeric",
+      "psi": 0.0036,
+      "psi_band": "no change",
+      "test": "ks",
+      "p_value": 0.22467557612163644,
+      "drifted": false
+    },
+    {
+      "column": "firmware_version",
+      "type": "categorical",
+      "psi": 0.0557,
+      "psi_band": "no change",
+      "test": "chi2",
+      "p_value": 7.810202539725863e-30,
+      "drifted": true
+    }
+  ],
+  "schema_diff": {
+    "added": [
+      "signal_quality"
+    ],
+    "removed": [],
+    "renamed": [
+      {
+        "from": "status",
+        "to": "device_status",
+        "value_overlap": 1.0
+      }
+    ],
+    "dtype_changes": []
+  },
+  "profiles": {
+    "baseline": {
+      "batch": "baseline",
+      "rows": 5000,
+      "columns": {
+        "device_id": {
+          "dtype": "object",
+          "count": 5000,
+          "non_null": 5000,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 200,
+          "uniqueness": 0.04
+        },
+        "timestamp": {
+          "dtype": "datetime64[ns]",
+          "count": 5000,
+          "non_null": 5000,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 3152,
+          "uniqueness": 0.6304
+        },
+        "temperature_c": {
+          "dtype": "float64",
+          "count": 5000,
+          "non_null": 5000,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 1297,
+          "uniqueness": 0.2594
+        },
+        "humidity_pct": {
+          "dtype": "float64",
+          "count": 5000,
+          "non_null": 4993,
+          "nulls": 7,
+          "completeness": 0.9986,
+          "validity": 1.0,
+          "cardinality": 2452,
+          "uniqueness": 0.4911
+        },
+        "battery_pct": {
+          "dtype": "float64",
+          "count": 5000,
+          "non_null": 5000,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 525,
+          "uniqueness": 0.105
+        },
+        "signal_dbm": {
+          "dtype": "float64",
+          "count": 5000,
+          "non_null": 5000,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 435,
+          "uniqueness": 0.087
+        },
+        "firmware_version": {
+          "dtype": "object",
+          "count": 5000,
+          "non_null": 5000,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 4,
+          "uniqueness": 0.0008
+        },
+        "status": {
+          "dtype": "object",
+          "count": 5000,
+          "non_null": 5000,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 3,
+          "uniqueness": 0.0006
+        }
+      },
+      "summary": {
+        "n_columns": 8,
+        "mean_completeness": 0.9998,
+        "mean_validity": 1.0,
+        "duplicate_rows": 0,
+        "duplicate_pct": 0.0
+      }
+    },
+    "new": {
+      "batch": "new",
+      "rows": 5100,
+      "columns": {
+        "device_id": {
+          "dtype": "object",
+          "count": 5100,
+          "non_null": 5100,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 200,
+          "uniqueness": 0.0392
+        },
+        "timestamp": {
+          "dtype": "datetime64[ns]",
+          "count": 5100,
+          "non_null": 5100,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 3169,
+          "uniqueness": 0.6214
+        },
+        "temperature_c": {
+          "dtype": "float64",
+          "count": 5100,
+          "non_null": 4687,
+          "nulls": 413,
+          "completeness": 0.919,
+          "validity": 1.0,
+          "cardinality": 1398,
+          "uniqueness": 0.2983
+        },
+        "humidity_pct": {
+          "dtype": "float64",
+          "count": 5100,
+          "non_null": 4692,
+          "nulls": 408,
+          "completeness": 0.92,
+          "validity": 0.974,
+          "cardinality": 2453,
+          "uniqueness": 0.5228
+        },
+        "battery_pct": {
+          "dtype": "float64",
+          "count": 5100,
+          "non_null": 5100,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 0.9818,
+          "cardinality": 581,
+          "uniqueness": 0.1139
+        },
+        "signal_dbm": {
+          "dtype": "float64",
+          "count": 5100,
+          "non_null": 5100,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 439,
+          "uniqueness": 0.0861
+        },
+        "firmware_version": {
+          "dtype": "object",
+          "count": 5100,
+          "non_null": 5100,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 4,
+          "uniqueness": 0.0008
+        },
+        "device_status": {
+          "dtype": "object",
+          "count": 5100,
+          "non_null": 5100,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 3,
+          "uniqueness": 0.0006
+        },
+        "signal_quality": {
+          "dtype": "object",
+          "count": 5100,
+          "non_null": 5100,
+          "nulls": 0,
+          "completeness": 1.0,
+          "validity": 1.0,
+          "cardinality": 3,
+          "uniqueness": 0.0006
+        }
+      },
+      "summary": {
+        "n_columns": 9,
+        "mean_completeness": 0.9821,
+        "mean_validity": 0.9951,
+        "duplicate_rows": 100,
+        "duplicate_pct": 1.96
+      }
+    }
+  }
+}
